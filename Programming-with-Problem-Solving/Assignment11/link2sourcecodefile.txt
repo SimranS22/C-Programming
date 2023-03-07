@@ -1,0 +1,19 @@
+[The code for the question has been done in Turbo C++ . Hence, the
+file extension .CPP is present.]
+
+A.CPP:
+
+#include<stdio.h>
+#include<conio.h>
+#include"B.CPP"
+extern int i;
+int main()
+{
+    clrscr();
+    printf("%d",i);
+    getch();
+    return 0;
+}
+
+B.CPP:
+int i=48;
