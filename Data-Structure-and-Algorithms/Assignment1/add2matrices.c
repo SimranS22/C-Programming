@@ -1,4 +1,4 @@
-// Write a C program for matrix multiplication.
+// Write a C program for matrix addition.
 
 #include<stdio.h>
 
@@ -32,26 +32,23 @@ int main()
         scanf("%d",&b[i][j]);
         }
     }
-    if(c1==r2)
+    if(r1=r2&&c1==c2)
     {
-        printf("Multiplication of the two matrices is possible.\n");
+        printf("Addition of the two matrices is possible.\n");
         for(i=0;i<r1;i++)
         {
             for(j=0;j<c2;j++)
-            { c[i][j]=0;
-                for(k=0;k<c1;k++)
-                {
-                c[i][j]+=a[i][k]*b[k][j];
-                }
+            { 
+                c[i][j]=a[i][j]+b[i][j];
             }
         }
-        printf("The Output matrix is:\n");
+        printf("Sum of 2 matrices:\n");
         for(i=0;i<r1;i++)
         {
-            for(j=0;j<c2;j++)
+            for(j=0;j<c1;j++)
             {
                 printf("%d ",c[i][j]);
-                if(j==c2-1)
+                if(j==c1-1)
                 {
                     printf("\n");
                 }
@@ -60,7 +57,7 @@ int main()
     }
     else
     {
-        printf("Multiplication of two matrices is not possible.");
+        printf("Addition of two matrices is not possible.");
     }
     return 0;
 }

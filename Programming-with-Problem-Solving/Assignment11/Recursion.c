@@ -13,7 +13,7 @@ int main()
     printf("-- Recursion Problems --");
     printf("\n1) Factorial of a number");
     printf("\n2) Fibonacci Series");
-    printf("\n3) Sum of n numbers");
+    printf("\n3) Sum of n natural numbers");
     printf("\nEnter choice :");
     scanf("%d",&choice);
     switch (choice){
