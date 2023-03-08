@@ -28,7 +28,7 @@ int main()
         {
             ++characters;
         }
-        if(str[i]=='.')
+        if(str[i]=='.'||str[i]=='?'||str[i]=='!')
         {
             ++sentences;
         }
