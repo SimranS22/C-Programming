@@ -1,36 +1,36 @@
-// A menu driven program to create a double ended queue by using array and implement the following instructions: insert, deletion, display
+// A menu driven program to create a double ended queue by using circular queue and implement the following instructions: insert, deletion, display
 
 #include<stdio.h>
 #define MAX 5
 
-void insert_rear();
-void insert_front();
-void delete_rear();
-void delete_front();
+void cq_insert_rear();
+void cq_insert_front();
+void cq_delete_rear();
+void cq_delete_front();
 void qdisplay();
 
 int rear=-1;
 int front=-1;
-int dq[MAX];
+int cdq[MAX];
 
 int main(){
     int choice;
     char ch;
-    printf("Double Ended Queue Menu -\n(1)Input restricted queue\n(2)Ouptut restricted queue\n(3)Display\n(4)Exit\n");
+    printf("Main Menu -\n(1)Input restricted queue\n(2)Ouptut restricted queue\n(3)Display\n(4)Exit\n");
     do{
-        printf("\nEnter your choice: ");
+        printf("\nMain Menu -> Enter your choice: ");
         scanf("%d",&choice);
         switch(choice){
-            case 1: printf("Restrictions -\n(a)insert_rear\n(b)delete_front\n(c)delete_rear\n(d)display\n(e)exit\n");
+            case 1: printf("Input restricted queue Menu -\n(a)cq_insert_rear\n(b)cq_delete_front\n(c)cq_delete_rear\n(d)display\n(e)exit\n");
             do{
                 printf("Choose restriction: ");
                 scanf(" %c",&ch);
                 switch(ch){
-                    case 'a': insert_rear();
+                    case 'a': cq_insert_rear();
                     break;
-                    case 'b': delete_front();
+                    case 'b': cq_delete_front();
                     break;
-                    case 'c': delete_rear();
+                    case 'c': cq_delete_rear();
                     break;
                     case 'd': qdisplay();
                     break;
@@ -39,16 +39,16 @@ int main(){
                 }
             }while(ch!='e');
             break;
-            case 2: printf("Restrictions -\n(a)insert_rear\n(b)insert_front\n(c)delete_front\n(d)display\n(e)exit\n");
+            case 2: printf("Output restricted queue Menu  -\n(a)cq_insert_rear\n(b)cq_insert_front\n(c)cq_delete_front\n(d)display\n(e)exit\n");
             do{
                 printf("Choose restriction: ");
                 scanf(" %c",&ch);
                 switch(ch){
-                    case 'a': insert_rear();
+                    case 'a': cq_insert_rear();
                     break;
-                    case 'b': insert_front();
+                    case 'b': cq_insert_front();
                     break;
-                    case 'c': delete_front();
+                    case 'c': cq_delete_front();
                     break;
                     case 'd': qdisplay();
                     break;
@@ -67,13 +67,13 @@ int main(){
     return 0;
 }
 
-void insert_front(){
+void cq_insert_front(){
     int a;
-    if((rear==MAX-1 && front==0)||(front=rear+1)){
+    if(((rear+1)%MAX)==front){
         printf("Queue Overflow!\n");
         return;
     }
-    if(front==-1){
+    if(front==-1 && rear==-1){
         front=rear=0;
     }
     else{
@@ -85,13 +85,13 @@ void insert_front(){
     }
     printf("Enter element to insert: ");
     scanf("%d",&a);
-    dq[front]=a;
+    cdq[front]=a;
+    printf("Element inserted.\n");
 }
 
-void insert_rear(){
+void cq_insert_rear(){
     int b;
-    int a;
-    if((rear==MAX-1 && front==0)||(front=rear+1)){
+    if(((rear+1)%MAX)==front){
         printf("Queue Overflow!\n");
         return;
     }
@@ -99,23 +99,24 @@ void insert_rear(){
         front=rear=0;
     }
     else{
-        if(rear==MAX-1){
+        if(rear==MAX-1|| front!=0){
             rear=0;
         }else{
-            rear=rear+1;
+            rear=(rear+1)%MAX;
         }
     }
     printf("Enter element to insert: ");
     scanf("%d",&b);
-    dq[rear]=b;
+    cdq[rear]=b;
+    printf("Element inserted.\n");
 }
 
-void delete_front(){
+void cq_delete_front(){
     if(front==-1){
         printf("Queue Underflow!\n");
         return;
     }
-    printf("Element %d deleted\n",dq[front]);
+    printf("Element %d deleted\n",cdq[front]);
     if(front==rear){
         front=rear=-1;
     }
@@ -129,12 +130,12 @@ void delete_front(){
     }
 }
 
-void delete_rear(){
+void cq_delete_rear(){
     if(front==-1){
         printf("Queue Underflow!\n");
         return;
     }
-    printf("Element %d deleted\n",dq[front]);
+    printf("Element %d deleted\n",cdq[front]);
     if(front==rear){
         front=rear=-1;
     }
@@ -153,24 +154,23 @@ void qdisplay(){
     if(front==-1){
         printf("Queue is Empty!");
     }
-    else{
-        if(fp<=rp){
-            while(fp<=rp){
-                printf("%d",dq[fp]);
-                fp++;
-            }
+    printf("Queue:\n")
+    if(fp<=rp){
+        while(fp<=rp){
+            printf("%d",cdq[fp]);
+            fp++;
         }
-        else{
-            while(fp<=MAX-1){
-                printf("%d",dq[fp]);
-                fp++;
-            }
-            fp=0;
-            while(fp<=rp){
-                printf("%d",dq[fp]);
-                fp++;
-            }
-        }
-        printf("\n");
     }
+    else{
+        while(fp<=MAX-1){
+            printf("%d",cdq[fp]);
+            fp++;
+        }
+        fp=0;
+        while(fp<=rp){
+            printf("%d",cdq[fp]);
+            fp++;
+        }
+    }
+        printf("\n");
 }
