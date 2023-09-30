@@ -30,7 +30,7 @@ int main(){
             break;
             default:printf("Wrong Choice!");
         }
-        printf("\nPerform another opertaion? [1 for yes and 0 for no]");
+        printf("\nPerform another operation? [1 for yes and 0 for no]");
         scanf("%d",&flag);
     }while(flag==1);
     return 0;
